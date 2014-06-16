@@ -1,5 +1,5 @@
 //ugly global variables but too happy the program works to fix
-var aTree = undefined
+var aTree = undefined;
 
 
 //enter d3 stage left
@@ -36,13 +36,13 @@ function update() {
    .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
   var nodeEnter = node.enter().append("g")
-   .attr("class", "node")
+   .attr("class", "node");
 
   nodeEnter.append("circle")
    .attr("r", 10)
    .style("fill", "#fff")
    .style("opacity", 0)
-   .transition().style("opacity", 1)
+   .transition().style("opacity", 1);
 
   nodeEnter.append("text")
    .attr("x", function(d) { 
@@ -52,7 +52,7 @@ function update() {
     return d.children || d._children ? "end" : "start"; })
    .text(function(d) { return d.name; })
    .style("fill-opacity", 0)
-   .transition().style("fill-opacity", 1)
+   .transition().style("fill-opacity", 1);
 
   node.attr("transform", function(d) { 
     return "translate(" + d.y + "," + d.x + ")"; });
@@ -62,7 +62,7 @@ function update() {
    .data(links, function(d) { return d.target.id; });
 
   link.enter().append("path", "g")
-   .attr("class", "link")
+   .attr("class", "link");
 
   link.attr("d", elbow);
 
@@ -88,11 +88,13 @@ function update() {
 $("#pusher").on("keypress", function(event) {
     if(event.which == 13) {
         event.preventDefault();
-        val = $(this).val()
-        if (aTree === undefined){
-          aTree = new BinarySearchTree(val)
+        val = $(this).val();
+        if (parseInt(val) == val){
+          if (aTree === undefined){
+            aTree = new BinarySearchTree(val);
+          }
+          aTree.push(val);
+          update();
         }
-        aTree.push(val)
-        update()
     }
-})
+});
