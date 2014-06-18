@@ -1,5 +1,5 @@
-//ugly global variables but too happy the program works to fix
-var aTree = undefined;
+//Needs refactor.  Minimum viable product indeed!
+var aTree;
 
 
 //enter d3 stage left
@@ -96,5 +96,6 @@ $("#pusher").on("keypress", function(event) {
           aTree.push(val);
           update();
         }
+        $(this).val("")
     }
 });
